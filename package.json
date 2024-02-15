@@ -1,0 +1,17 @@
+{
+  "name": "kunstmuseum_sg_bildgenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Basil Egger, Luca Busby",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.18.2",
+    "serialport": "^12.0.0",
+    "shelljs": "^0.8.5",
+    "socket.io": "^4.7.2"
+  }
+}

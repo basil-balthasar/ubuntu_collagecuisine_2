@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kunstmuseum St.Gallen Bildgenerator</title>
+    <!--Data from Teensy Stuff-->
+    <script
+      src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+      integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+      crossorigin="anonymous"
+    ></script>
+    <!--P5JS stuff-->
+    <script src="Images/image_infos.js"></script>
+    <script src="dataTransform.js"></script>
+    <script src="collageGenerator.js"></script>
+    <script src="https://openprocessing.org/openprocessing_sketch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+    <script src="qrcode.min.js"></script>
+    <!--StyleCSS-->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <!--<button onclick="showQRCode()">Show QR Code</button>-->
+
+    <div
+      id="qrcode"
+      style="padding: 30px; display: none; justify-content: center"
+    ></div>
+    <img style="display: none" id="recentImage" src="" alt="Recent Image" />
+    <script>
+      const qrcodeDiv = document.getElementById("qrcode");
+
+      let collageNumber = 0;
+      const currentFrame = 1;
+
+      const lastQRFrame = currentFrame;
+
+      function showQRCode() {
+        if (qrcodeDiv.innerHTML == "") {
+          const imagePath = "images";
+          const imageExtension = "png";
+
+          // Show the QR code div
+          qrcodeDiv.style.display = "block";
+
+          // Get the list of images in the folder
+
+          fetch(
+            `https://api.github.com/repos/lucabusby/QR-Testing/contents/${imagePath}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const images = data.filter((item) =>
+                item.name.endsWith(`.${imageExtension}`)
+              );
+              if (images.length > 0) {
+                generateQRCode();
+              }
+            });
+
+          // Hide the QR code after 5 seconds (5000 milliseconds)
+          setTimeout(() => {
+            qrcodeDiv.style.display = "none";
+            // Clear the contents of the qrcodeDiv
+            qrcodeDiv.innerHTML = "";
+          }, 10000);
+        }
+        let recentImageName = localStorage.getItem("recentImageName");
+
+        let imageUrl =
+          "https://raw.githubusercontent.com/basil-balthasar/ubuntu_collagecuisine/main/public/History/SavedImages/" +
+          recentImageName;
+
+        function generateQRCode() {
+          const qrcode = new QRCode(qrcodeDiv, {
+            //text: "https://youtube.com",
+            text: imageUrl,
+            width: 400,
+            height: 400,
+            colorDark: "#000000",
+            colorLight: "#ffff",
+          });
+        }
+      }
+
+      qrScriptLoaded = true;
+    </script>
+  </body>
+</html>
