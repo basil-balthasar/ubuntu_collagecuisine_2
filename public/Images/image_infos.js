@@ -23,18 +23,18 @@ function ImageObject(isOn, image, position, scale, rotation, blendMode){
 //load images into arrays
 function preload(){
     for(let b = 0; b<numberOfImages[0]; b++){
-        backgroundImages[b] = loadImage("/Images/BG/"+(b).toString()+".png")
+        backgroundImages[b] = loadImage("./Images/BG/"+(b).toString()+".png")
     }
     for(let f = 0; f<numberOfImages[1]; f++){
-        foregroundImages[f] = loadImage("/Images/FG/"+(f).toString()+".png")
+        foregroundImages[f] = loadImage("./Images/FG/"+(f).toString()+".png")
     }
     for(let o = 0; o<numberOfImages[2]; o++){
-        layerOneImages[o] = loadImage("/Images/ONE/"+(o).toString()+".png")
+        layerOneImages[o] = loadImage("./Images/ONE/"+(o).toString()+".png")
     }
     for(let t = 0; t<numberOfImages[3]; t++){
-        layerTwoImages[t] = loadImage("/Images/TWO/"+(t).toString()+".png")
+        layerTwoImages[t] = loadImage("./Images/TWO/"+(t).toString()+".png")
     }
     for(let h = 0; h<numberOfImages[4]; h++){
-        layerThreeImages[h] = loadImage("/Images/THREE/"+(h).toString()+".png")
+        layerThreeImages[h] = loadImage("./Images/THREE/"+(h).toString()+".png")
     }
 }
